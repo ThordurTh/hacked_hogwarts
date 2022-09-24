@@ -123,7 +123,7 @@ function selectFilter(event){
     // console.log(event)
     // Clear searchfield
     searchInput.value = "";
-    
+
     const filter = event.target.dataset.filter;
     setFilter(filter);
 }
@@ -222,7 +222,7 @@ function sortList(sortedList) {
 //----------------------------------------------
 // SEARCH
 //----------------------------------------------
-
+// ref: https://javascript.plainenglish.io/how-to-build-a-search-bar-7d8a8a3d9d00
       // get search bar element
       const searchInput = document.getElementById("searchInput");
 
