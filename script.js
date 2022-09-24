@@ -305,6 +305,7 @@ function displayStudent(student) {
 
 
 function showCount() {
+    //ref https://stackoverflow.com/questions/45547504/counting-occurrences-of-particular-property-value-in-array-of-objects
     const gryffindorStudents = allStudents.filter((obj) => obj.house === "Gryffindor").length;
     document.querySelector(".house_gryffindor").textContent = `Gryffindor students ${gryffindorStudents}`;
 
