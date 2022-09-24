@@ -154,8 +154,8 @@ function filterList(filteredList) {
 }
 
 function isGryff(allStudents) {
-    // console.log(allStudents.house);
     return allStudents.house === "Gryffindor"
+    
 } 
 function isSlyth(allStudents) {
     return allStudents.house === "Slytherin"
@@ -228,13 +228,17 @@ function sortList(sortedList) {
 
       // store name elements in array-like object
       const namesFromDOM = document.getElementsByClassName("fullname");
-
       
       // listen for user events
       searchInput.addEventListener("keyup", (event) => {
         //   const { value } = event.target;
           // get user search input converted to lowercase
           const searchQuery = event.target.value.toLowerCase();
+
+        // Student count
+          const currentCount = document.querySelector(".currentCount");
+          currentCount.textContent = "Currently displaying: 34 students";
+          let count = 0;
           
           for (const nameElement of namesFromDOM) {
               // store name text and convert to lowercase
@@ -247,8 +251,14 @@ function sortList(sortedList) {
               } else {
                   // no match, don't display name
                   nameElement.parentNode.classList.add("hide");
+                  // Get the number of elements that have the class 
+                  if (nameElement.classList.contains("hide")) {
+                    count ++ ;
+                    currentCount.textContent = `Currently displaying: ${34 - count} students`;
+          }
               }
           }
+          
       });
 
 //----------------------------------------------
@@ -259,6 +269,7 @@ function buildList() {
     const currentList = filterList(allStudents);
     const sortedList = sortList(currentList);
 
+    showCount()
     displayList(sortedList);
     // displayList(currentList);
 }
@@ -290,5 +301,23 @@ function displayStudent(student) {
       
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
+}
+
+
+function showCount() {
+    const gryffindorStudents = allStudents.filter((obj) => obj.house === "Gryffindor").length;
+    document.querySelector(".house_gryffindor").textContent = `Gryffindor students ${gryffindorStudents}`;
+
+    const slytherinStudents = allStudents.filter((obj) => obj.house === "Slytherin").length;
+    document.querySelector(".house_slytherin").textContent = `Slytherin students ${slytherinStudents}`;
+
+    const ravenclawStudents = allStudents.filter((obj) => obj.house === "Gryffindor").length;
+    document.querySelector(".house_ravenclaw").textContent = `Ravenclaw students ${ravenclawStudents}`;
+
+    const hufflepuffStudents = allStudents.filter((obj) => obj.house === "Hufflepuff").length;
+    document.querySelector(".house_hufflepuff").textContent = `Hufflepuff students ${hufflepuffStudents}`;
+
+    document.querySelector(".total").textContent = `Total students ${allStudents.length}`;
+
 }
 
