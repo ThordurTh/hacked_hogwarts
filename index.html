@@ -8,6 +8,100 @@
     <title>Hacked Hogwarts</title>
   </head>
   <body>
+    <h1>Hogwarts Student List</h1>
+    <div>
+      Filter by:
+      <button class="filter" data-action="filter" data-filter="gryffindor">
+        Gryffindor
+      </button>
+      <button class="filter" data-action="filter" data-filter="slytherin">
+        Slytherin
+      </button>
+      <button class="filter" data-action="filter" data-filter="ravenclaw">
+        Ravenclaw
+      </button>
+      <button class="filter" data-action="filter" data-filter="hufflepuff">
+        Hufflepuff
+      </button>
+      <button class="filter" data-action="filter" data-filter="*">all</button>
+    </div>
+    <hr />
+
+    <table id="list">
+      <thead>
+        <tr id="sorting">
+          <th data-action="sort" data-sort-direction="desc" data-sort="image">
+            image
+          </th>
+          <th
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="firstName"
+          >
+            First Name
+          </th>
+          <th
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="middleName"
+          >
+            Middle Name
+          </th>
+          <th
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="lastName"
+          >
+            Last Name
+          </th>
+          <th
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="nickname"
+          >
+            Nickname
+          </th>
+          <th data-action="sort" data-sort-direction="desc" data-sort="house">
+            House
+          </th>
+          <th data-action="sort" data-sort-direction="desc" data-sort="inquis">
+            Inquisitorial Squad
+          </th>
+          <th data-action="sort" data-sort-direction="desc" data-sort="prefect">
+            Prefect
+          </th>
+          <th data-action="sort" data-sort-direction="desc" data-sort="gender">
+            Gender
+          </th>
+          <th data-action="sort" data-sort-direction="desc" data-sort="expell">
+            Expell
+          </th>
+          <th data-action="sort" data-sort-direction="desc" data-sort="blood">
+            Blood Type
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- TEMPLATE HERE -->
+      </tbody>
+    </table>
+
+    <template id="animal">
+      <tr>
+        <td data-field="image"><img src="" alt="" /></td>
+        <td data-field="firstName">firstname</td>
+        <td data-field="middleName">middlename</td>
+        <td data-field="lastName">lastname</td>
+        <td data-field="nickname">nickname</td>
+        <td data-field="house">house</td>
+        <td data-field="inquis">☆</td>
+        <td data-field="prefect" data-member="false">☆</td>
+        <td data-field="gender">gender</td>
+        <td data-field="expell">☆</td>
+        <td data-field="blood">blood</td>
+      </tr>
+    </template>
+
     <script src="script.js"></script>
   </body>
 </html>
