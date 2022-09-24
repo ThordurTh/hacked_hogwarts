@@ -21,7 +21,8 @@ const Student = {
     inquis: false,
     prefect: false,
     expell: false,
-    blood: ""
+    blood: "",
+    fullname: ""
 }
 
 const settings = {
@@ -40,7 +41,7 @@ async function start( ) {
 function registerButtons() {
     document.querySelectorAll("[data-action='filter']").forEach(button => button.addEventListener("click", selectFilter));
     document.querySelectorAll("[data-action='sort']").forEach(button => button.addEventListener("click", selectSort));
-    // document.querySelector("").addEventListener("click", search);
+    // document.querySelector("#search").addEventListener("input", search);
 }
 
 // LOAD STUDENT JSON
@@ -67,6 +68,8 @@ function preapareObject( studentData ) {
     let house = studentData.house;
     let gender = studentData.gender;
     let nickname = studentData.nickname;
+
+    student.fullname = fullname;
 
     // All characters to lowercase
     fullname = fullname.toLowerCase();
@@ -118,6 +121,9 @@ function preapareObject( studentData ) {
 //----------------------------------------------
 function selectFilter(event){
     // console.log(event)
+    // Clear searchfield
+    searchInput.value = "";
+    
     const filter = event.target.dataset.filter;
     setFilter(filter);
 }
@@ -214,6 +220,38 @@ function sortList(sortedList) {
 }
 
 //----------------------------------------------
+// SEARCH
+//----------------------------------------------
+
+      // get search bar element
+      const searchInput = document.getElementById("searchInput");
+
+      // store name elements in array-like object
+      const namesFromDOM = document.getElementsByClassName("fullname");
+
+      
+      // listen for user events
+      searchInput.addEventListener("keyup", (event) => {
+        //   const { value } = event.target;
+          // get user search input converted to lowercase
+          const searchQuery = event.target.value.toLowerCase();
+          
+          for (const nameElement of namesFromDOM) {
+              // store name text and convert to lowercase
+              let name = nameElement.textContent.toLowerCase();
+              
+              // compare current name to search input
+              if (name.includes(searchQuery)) {
+                  // found name matching search, display it
+                  nameElement.parentNode.classList.remove("hide");
+              } else {
+                  // no match, don't display name
+                  nameElement.parentNode.classList.add("hide");
+              }
+          }
+      });
+
+//----------------------------------------------
 // BUILDLIST
 //----------------------------------------------
 
@@ -248,7 +286,9 @@ function displayStudent(student) {
     clone.querySelector("[data-field=prefect]").textContent = student.prefect;
     clone.querySelector("[data-field=expell]").textContent = student.expell;
     clone.querySelector("[data-field=blood]").textContent = student.blood;
-  
+    clone.querySelector("[data-field=fullname]").textContent = student.fullname;
+      
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
 }
+

@@ -27,3 +27,7 @@ img {
 [data-action] {
     cursor: pointer;
   }
+
+.hide {
+    display: none;
+}
