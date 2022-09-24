@@ -24,6 +24,12 @@ const Student = {
     blood: ""
 }
 
+const settings = {
+    filterBy: "all",
+    sortBy: "name",
+    sortDir: "asc"
+}
+
 // START
 async function start( ) {
     await loadStudentJSON();
@@ -32,7 +38,7 @@ async function start( ) {
 }
 
 function registerButtons() {
-    // document.querySelectorAll("[data-action='filter']").forEach(button => button.addEventListener("click", selectFilter));
+    document.querySelectorAll("[data-action='filter']").forEach(button => button.addEventListener("click", selectFilter));
     // document.querySelectorAll("[data-action='sort']").forEach(button => button.addEventListener("click", selectSort));
     // document.querySelector("").addEventListener("click", search);
 }
@@ -107,13 +113,66 @@ function preapareObject( studentData ) {
     return student;
 }
 
+//----------------------------------------------
+// FILTERING
+//----------------------------------------------
+function selectFilter(event){
+    // console.log(event)
+    const filter = event.target.dataset.filter;
+    setFilter(filter);
+}
+
+function setFilter(filter) {
+    settings.filterBy = filter.replace(filter[0], filter[0].toUpperCase());
+    buildList();
+}
+
+function filterList(filteredList) {
+    // let filteredList = allAnimals;
+    if (settings.filterBy === "Gryffindor"){
+    // Create a filtered list of only cats
+    filteredList = allStudents.filter(isGryff);
+    } else if (settings.filterBy === "Slytherin") {
+    // Create a filtered list of only dogs
+    filteredList = allStudents.filter(isSlyth);
+    } else if (settings.filterBy === "Ravenclaw") {
+        // Create a filtered list of only dogs
+        filteredList = allStudents.filter(isRaven);
+    } else if (settings.filterBy === "Hufflepuff") {
+        // Create a filtered list of only dogs
+        filteredList = allStudents.filter(isHuffle);
+    } else { // this "else" in unneccesary but makes it more clear
+        filteredList = allStudents;
+    }
+    return filteredList;
+}
+
+function isGryff(allStudents) {
+    // console.log(allStudents.house);
+    return allStudents.house === "Gryffindor"
+} 
+function isSlyth(allStudents) {
+    return allStudents.house === "Slytherin"
+} 
+function isRaven(allStudents) {
+    return allStudents.house === "Ravenclaw"
+} 
+function isHuffle(allStudents) {
+    return allStudents.house === "Hufflepuff"
+} 
+
+
+
+//----------------------------------------------
+// BUILDLIST
+//----------------------------------------------
 
 function buildList() {
-    // const currentList = filterList(allAnimals);
+    const currentList = filterList(allStudents);
     // const sortedList = sortList(currentList);
 
-    // displayList(sortedList;)
-    displayList(allStudents)
+    // displayList(sortedList);
+    displayList(currentList);
 }
 
 function displayList(student) {
