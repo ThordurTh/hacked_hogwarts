@@ -1,0 +1,109 @@
+Hacked Hogwarts
+
+    1. Displaying the list of students, with sorting, filtering, searching and details popup.
+        a. Activity diagram
+        b. Wireframe
+        c. Code
+            - Basic HTML
+            - JS
+            - CSS
+    2. Expelling and prefects
+        a. Activity diagram
+        b. Code
+    3. Blood-status and inquisitorial squad
+        a. Activity diagram
+        b. Code
+    4. Hacking
+        a. Activity diagram
+        b. Code
+
+Report 
+- Wireframe for the visual design
+- An overview of various components of the application                                  //DONE?
+- A list of features (sort by first name, sort by last name, etc)                       //DONE
+- A can/can't list of each component or activity                                        //DONE
+- Pseudocode or activity diagrams for algorithms
+    - Expelling (including check for not expelling you)
+    - Prefects
+    - Blood status
+    - hackTheSystem function and additional hacking features
+- Complete activity diagram for all functions, which parameters they recieve and values they return
+- A list of Student-object properties (firstName, lastName,imagteName and so on), could be a screengrab of the student object
+- Frontpage must inlcude:
+    - Your name
+    - A screenshot of the product
+    - A link to the final solution
+    - A link to the github repository
+
+
+
+Feature list
+- Sort by               
+    - first name                        //DONE
+    - middle name                       //DONE   
+    - last name                         //DONE
+    - house                             //DONE
+    - blood status  
+- Filter by     
+    - house                             //DONE
+    - inq squad members
+    - expelled
+- Search by
+    - first name                        //DONE
+    - last name                         //DONE
+- Shows:
+    - Number of students in each house
+    - Total number of students (not expelled)
+    - Number of students expelled
+    - Number of students currently displayed
+- Select for additional information
+    - First name
+    - Middle name (if any)
+    - Nick name (if any)
+    - Last name
+    - Photo of student (if exists)
+    - House Crest and colors
+    - Blood-status
+    - If the student is:
+        - prefect or not
+        - expelled or not
+        - member of inquisitorial squad or not
+- Expell students
+- Choose prefects
+    - Up to two students from each house
+- Inquisitorial squad
+    - Appoints students to the squad
+- Hack the system 
+    - My name will be injected into the list and can not be expelled
+    - Pure-bloods will get a random blood status, half- and muggle- bloods are listed as pure-bloods
+    - Adding a student to the inquisitorial squad will only work for a limited time
+
+Feature overview
+- (list) Show list of students                                                          // Know how to do
+    - Show number of students listed
+- (popup/modal) Click one student in the list to see details                            // Know how to do (kinda)
+    - “Theming” the modal with colors and crest, depending on the house of the student
+- (filter) Filtering the list                                                           // Know how to do
+    - By house (Gryffindor, Ravenclaw, HufflePuff, Slytherin)
+- (expelling) Expel a student                                                           // Not sure
+    - Showing the list of expelled students
+- (sorting) Sorting the list                                                            // Know how to do
+    - First name, last name, house (a-z, z-a)
+- (total count) Show number of students in each house, and total students (and expelled) // Know how to do
+- (hacking) Hacked Hogwarts                                                             // Not sure
+    - Insert yourself
+    - “break” blood-status
+    - “break” inq squad
+- (prefect) Student can be made/toggled as prefects                                     // Know how to do
+    - Only two pr. House
+    - Preferably a boy and a girl
+- (search) Search for students in the list                                              // Not sure
+- (inq squad) Inquisitorial Squad – adding and removing pure-bloods                     // Not sure
+- (blood status) Blood Status – find the blood-status of each student                   // Not sure
+
+
+Hacking the system
+- button event listener
+1. Create a student object with your name and push it to the list of students. When you expell, check if the name is on the list
+2. loop through the students, modify blood status with a condition 
+3. setInterval
