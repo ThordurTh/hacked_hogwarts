@@ -26,7 +26,7 @@ const Student = {
 
 const settings = {
     filterBy: "all",
-    sortBy: "name",
+    sortBy: "firstName",
     sortDir: "asc"
 }
 
@@ -39,7 +39,7 @@ async function start( ) {
 
 function registerButtons() {
     document.querySelectorAll("[data-action='filter']").forEach(button => button.addEventListener("click", selectFilter));
-    // document.querySelectorAll("[data-action='sort']").forEach(button => button.addEventListener("click", selectSort));
+    document.querySelectorAll("[data-action='sort']").forEach(button => button.addEventListener("click", selectSort));
     // document.querySelector("").addEventListener("click", search);
 }
 
@@ -161,7 +161,57 @@ function isHuffle(allStudents) {
     return allStudents.house === "Hufflepuff"
 } 
 
+//----------------------------------------------
+// SORTING
+//----------------------------------------------
+// SETS SORTING AND SENDS TO sortList()
+function selectSort(event) {
+    // console.log(event);
+    const sortBy = event.target.dataset.sort;
+    const sortDir = event.target.dataset.sortDirection;
 
+    const oldElement = document.querySelector(`[data-sort="${settings.sortBy}"]`);
+    oldElement.classList.remove("sortby");
+    event.target.classList.add("sortby");
+
+    if (sortDir === "desc") {
+        event.target.dataset.sortDirection = "asc";
+    } else {
+        event.target.dataset.sortDirection = "desc";
+    }
+    setSort(sortBy, sortDir);
+}
+
+function setSort(sortBy,sortDir) {
+    settings.sortBy = sortBy;
+    settings.sortDir = sortDir
+   
+    
+    buildList();
+}
+
+// DETERMINES WHAT TO SORT 
+function sortList(sortedList) {
+    // let sortedList = allAnimals;
+    let direction = 1;
+    if (settings.sortDir === "desc") {
+       direction = 1;
+    } else {
+        direction = -1;
+    }
+
+    sortedList = sortedList.sort(sortByProperty);
+
+    function sortByProperty(A, B) {
+        if (A[settings.sortBy] < B[settings.sortBy]) {
+            return -1 * direction;
+        } else {
+            return 1 * direction;
+        }
+    }
+
+    return sortedList;
+}
 
 //----------------------------------------------
 // BUILDLIST
@@ -169,10 +219,10 @@ function isHuffle(allStudents) {
 
 function buildList() {
     const currentList = filterList(allStudents);
-    // const sortedList = sortList(currentList);
+    const sortedList = sortList(currentList);
 
-    // displayList(sortedList);
-    displayList(currentList);
+    displayList(sortedList);
+    // displayList(currentList);
 }
 
 function displayList(student) {
@@ -184,7 +234,7 @@ function displayList(student) {
 
 function displayStudent(student) {
     // create clone
-    const clone = document.querySelector("template#animal").content.cloneNode(true);
+    const clone = document.querySelector("template#student").content.cloneNode(true);
 
     // set clone data
     clone.querySelector("[data-field=firstName]").textContent = student.firstName;
