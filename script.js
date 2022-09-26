@@ -29,7 +29,8 @@ const Student = {
 const settings = {
     filterBy: "all",
     sortBy: "firstName",
-    sortDir: "asc"
+    sortDir: "asc",
+    currentCount: 0
 }
 
 // START
@@ -135,6 +136,9 @@ function setFilter(filter) {
 }
 
 function filterList(filteredList) {
+    settings.currentCount = allStudents.filter((obj) => obj.house === settings.filterBy).length;
+    document.querySelector(".currentCount").textContent = `Currently displaying: ${settings.currentCount}`;
+
     // let filteredList = allAnimals;
     if (settings.filterBy === "Gryffindor"){
     // Create a filtered list of only cats
@@ -150,6 +154,9 @@ function filterList(filteredList) {
         filteredList = allStudents.filter(isHuffle);
     } else { // this "else" in unneccesary but makes it more clear
         filteredList = allStudents;
+        settings.currentCount = allStudents.length;
+        document.querySelector(".currentCount").textContent = `Currently displaying: ${allStudents.length}`;
+
     }
     return filteredList;
 }
@@ -236,11 +243,13 @@ function sortList(sortedList) {
         //   const { value } = event.target;
           // get user search input converted to lowercase
           const searchQuery = event.target.value.toLowerCase();
-
+          if (document.querySelector("#searchInput").value === "") {
+            document.querySelector(".currentCount").textContent = `Currently displaying: ${settings.currentCount} students`;
+        }
         // Student count
-          const currentCount = document.querySelector(".currentCount");
-          currentCount.textContent = "Currently displaying: 34 students";
+        //   const currentCountD = document.querySelector(".currentCount");
           let count = 0;
+          
           
           for (const nameElement of namesFromDOM) {
               // store name text and convert to lowercase
@@ -256,8 +265,8 @@ function sortList(sortedList) {
                   // Get the number of elements that have the class 
                   if (nameElement.classList.contains("hide")) {
                     count ++ ;
-                    currentCount.textContent = `Currently displaying: ${34 - count} students`;
-          }
+                    document.querySelector(".currentCount").textContent = `Currently displaying: ${settings.currentCount - count} students`;
+        }
               }
           }
           
@@ -271,7 +280,7 @@ function buildList() {
     const currentList = filterList(allStudents);
     const sortedList = sortList(currentList);
 
-    showCount()
+    showCount();
     displayList(sortedList);
     // displayList(currentList);
 }
@@ -301,15 +310,9 @@ function displayStudent(student) {
     clone.querySelector("[data-field=fullname]").textContent = student.fullname;
       
 
-    if (student.expell === true) {
-        clone.querySelector("[data-field=expell]").textContent = "★";
-    } else {
-        clone.querySelector("[data-field=expell]").textContent = "☆";
-    }
+    clone.querySelector("[data-field=expell]").addEventListener("click", clickExpell);
 
-    clone.querySelector("[data-field=expell]").addEventListener("click", clickStar);
-
-    function clickStar() {
+    function clickExpell() {
         if (student.expell === false) {
             student.expell = true;
             expellStudent(student);
@@ -328,6 +331,7 @@ function displayStudent(student) {
 }
 
 
+
 function showCount() {
     //ref https://stackoverflow.com/questions/45547504/counting-occurrences-of-particular-property-value-in-array-of-objects
     const gryffindorStudents = allStudents.filter((obj) => obj.house === "Gryffindor").length;
@@ -343,6 +347,7 @@ function showCount() {
     document.querySelector(".house_hufflepuff").textContent = `Hufflepuff students ${hufflepuffStudents}`;
 
     document.querySelector(".total").textContent = `Total students ${allStudents.length}`;
-
+    document.querySelector(".expelled").textContent = `Expelled students ${expelledStudents.length}`;
+    document.querySelector(".currentCount").textContent = `Currently displaying: ${settings.currentCount}`;
 }
 
