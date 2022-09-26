@@ -173,6 +173,8 @@ function isHuffle(allStudents) {
 // SETS SORTING AND SENDS TO sortList()
 function selectSort(event) {
     // console.log(event);
+    searchInput.value = "";
+
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
 
