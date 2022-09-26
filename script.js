@@ -319,9 +319,8 @@ function displayStudent(student) {
     }
 
     function expellStudent(selectedStudent) {
-        expelledStudents = allStudents.filter(student => student.expell);
-        selectedStudent.pop(selectedStudent.indexOf(expelledStudents));
-
+        expelledStudents.push(selectedStudent);
+        allStudents = allStudents.filter(student => student.expell===false);
     }
 
     // append clone to list
