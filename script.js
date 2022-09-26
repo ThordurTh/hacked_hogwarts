@@ -8,7 +8,6 @@ const url = "https://petlatkea.dk/2021/hogwarts/students.json";
 const bloodurl = "https://petlatkea.dk/2021/hogwarts/families.json";
 
 let allStudents = [];
-let bloodStatus = [];
 let halfBloodFamNames;
 let pureBloodFamNames;
 
@@ -69,7 +68,7 @@ function prepareObjects( studentData, bloodData ) {
     allStudents = studentData.map( prepareObject );
 
     //bloodStatus = bloodData.map( prepareObject );
-    console.log("halfBloodFamNames",halfBloodFamNames)
+    // console.log("halfBloodFamNames",halfBloodFamNames)
     // console.table(allStudents);
     buildList();
 }
