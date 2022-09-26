@@ -8,6 +8,9 @@ const url = "https://petlatkea.dk/2021/hogwarts/students.json";
 const bloodurl = "https://petlatkea.dk/2021/hogwarts/families.json";
 
 let allStudents = [];
+let bloodStatus = [];
+let halfBloodFamNames;
+let pureBloodFamNames;
 
 // The prototype for all students: 
 const Student = {
@@ -21,7 +24,7 @@ const Student = {
     inquis: false,
     prefect: false,
     expell: false,
-    blood: "",
+    blood: "muggle",
     fullname: ""
 }
 
@@ -46,23 +49,33 @@ function registerButtons() {
 
 // LOAD STUDENT JSON
 async function loadStudentJSON() {
-    const response = await fetch(url);
-    const studentData = await response.json();
+    const studentResponse = await fetch(url);
+    const studentData = await studentResponse.json();
+    const bloodResponse = await fetch(bloodurl);
+    const bloodData = await bloodResponse.json();
+    // console.log(bloodData)
     // console.table(studentData);
     // when loaded, prepare data objects
-    prepareObjects( studentData );
+    // console.log("studentData",studentData)
+    // console.log("bloodData",bloodData)
+    // console.log("&&&%%%%%%%%%%%%%%%%%%%%%%")
+    prepareObjects( studentData, bloodData);
 }
 
 // PREPARE STUDENT DATA
-function prepareObjects( studentData ) {
-    allStudents = studentData.map( preapareObject );
+function prepareObjects( studentData, bloodData ) {
+    halfBloodFamNames = bloodData.half;
+    pureBloodFamNames = bloodData.pure;
+    allStudents = studentData.map( prepareObject );
 
+    //bloodStatus = bloodData.map( prepareObject );
+    console.log("halfBloodFamNames",halfBloodFamNames)
     // console.table(allStudents);
     buildList();
 }
 
 // SEPERATE THE STUDENT DATA INTO MORE PROPERTIES
-function preapareObject( studentData ) {
+function prepareObject( studentData ) {
     const student = Object.create(Student);
     let fullname = studentData.fullname;
     let house = studentData.house;
@@ -113,6 +126,16 @@ function preapareObject( studentData ) {
         student.nickname = student.nickname.substring(1, student.nickname.length-1);
     } 
 
+    calculateBloodStatus();
+    function calculateBloodStatus(){
+        if (halfBloodFamNames.includes(student.lastName) && pureBloodFamNames.includes(student.lastName)) {
+            student.blood = "pure";
+        } else if (pureBloodFamNames.includes(student.lastName)) {
+            student.blood = "pure";
+        } else if (halfBloodFamNames.includes(student.lastName)) {
+            student.blood = "half";
+        }
+    }
     return student;
 }
 
@@ -271,7 +294,7 @@ function buildList() {
     const currentList = filterList(allStudents);
     const sortedList = sortList(currentList);
 
-    showCount()
+    showCount();
     displayList(sortedList);
     // displayList(currentList);
 }
