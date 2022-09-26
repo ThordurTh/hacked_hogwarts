@@ -31,3 +31,7 @@ img {
 .hide {
     display: none;
 }
+
+tbody tr td[data-field="expell"] {
+    cursor: pointer;
+  }
