@@ -9,6 +9,8 @@ const bloodurl = "https://petlatkea.dk/2021/hogwarts/families.json";
 
 let allStudents = [];
 let bloodStatus = [];
+let halfBloodFamNames;
+let pureBloodFamNames;
 
 // The prototype for all students: 
 const Student = {
@@ -22,7 +24,7 @@ const Student = {
     inquis: false,
     prefect: false,
     expell: false,
-    blood: "",
+    blood: "muggle",
     fullname: ""
 }
 
@@ -54,21 +56,23 @@ async function loadStudentJSON() {
     // console.log(bloodData)
     // console.table(studentData);
     // when loaded, prepare data objects
+    // console.log("studentData",studentData)
+    // console.log("bloodData",bloodData)
+    // console.log("&&&%%%%%%%%%%%%%%%%%%%%%%")
     prepareObjects( studentData, bloodData);
 }
 
 // PREPARE STUDENT DATA
 function prepareObjects( studentData, bloodData ) {
+    halfBloodFamNames = bloodData.half;
+    pureBloodFamNames = bloodData.pure;
     allStudents = studentData.map( prepareObject );
-    bloodStatus = bloodData.map( prepareObject );
+
+    //bloodStatus = bloodData.map( prepareObject );
+    console.log("halfBloodFamNames",halfBloodFamNames)
     // console.table(allStudents);
     buildList();
 }
- function wow(bloodData) {
-    let pure = bloodData.pure;
-    console.log(pure);
-    return 
- }
 
 // SEPERATE THE STUDENT DATA INTO MORE PROPERTIES
 function prepareObject( studentData ) {
@@ -122,6 +126,16 @@ function prepareObject( studentData ) {
         student.nickname = student.nickname.substring(1, student.nickname.length-1);
     } 
 
+    calculateBloodStatus();
+    function calculateBloodStatus(){
+        if (halfBloodFamNames.includes(student.lastName) && pureBloodFamNames.includes(student.lastName)) {
+            student.blood = "pure";
+        } else if (pureBloodFamNames.includes(student.lastName)) {
+            student.blood = "pure";
+        } else if (halfBloodFamNames.includes(student.lastName)) {
+            student.blood = "half";
+        }
+    }
     return student;
 }
 
