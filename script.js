@@ -8,6 +8,7 @@ const url = "https://petlatkea.dk/2021/hogwarts/students.json";
 const bloodurl = "https://petlatkea.dk/2021/hogwarts/families.json";
 
 let allStudents = [];
+let expelledStudents = [];
 
 // The prototype for all students: 
 const Student = {
@@ -173,6 +174,7 @@ function isHuffle(allStudents) {
 // SETS SORTING AND SENDS TO sortList()
 function selectSort(event) {
     // console.log(event);
+    searchInput.value = "";
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
 
@@ -295,10 +297,33 @@ function displayStudent(student) {
     clone.querySelector("[data-field=gender]").textContent = student.gender;
     clone.querySelector("[data-field=inquis]").textContent = student.inquis;
     clone.querySelector("[data-field=prefect]").textContent = student.prefect;
-    clone.querySelector("[data-field=expell]").textContent = student.expell;
     clone.querySelector("[data-field=blood]").textContent = student.blood;
     clone.querySelector("[data-field=fullname]").textContent = student.fullname;
       
+
+    if (student.expell === true) {
+        clone.querySelector("[data-field=expell]").textContent = "★";
+    } else {
+        clone.querySelector("[data-field=expell]").textContent = "☆";
+    }
+
+    clone.querySelector("[data-field=expell]").addEventListener("click", clickStar);
+
+    function clickStar() {
+        if (student.expell === false) {
+            student.expell = true;
+            expellStudent(student);
+        } 
+
+        buildList();
+    }
+
+    function expellStudent(selectedStudent) {
+        expelledStudents = allStudents.filter(student => student.expell);
+        selectedStudent.pop(selectedStudent.indexOf(expelledStudents));
+
+    }
+
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
 }
