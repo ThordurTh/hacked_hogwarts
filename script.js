@@ -327,12 +327,12 @@ function displayStudent(student) {
     clone.querySelector("[data-field=image] img").setAttribute("src", student.image);
     clone.querySelector("[data-field=house]").textContent = student.house;
     clone.querySelector("[data-field=gender]").textContent = student.gender;
-    clone.querySelector("[data-field=inquis]").textContent = student.inquis;
+    // clone.querySelector("[data-field=inquis]").textContent = student.inquis;
     clone.querySelector("[data-field=prefect]").textContent = student.prefect;
     clone.querySelector("[data-field=blood]").textContent = student.blood;
     clone.querySelector("[data-field=fullname]").textContent = student.fullname;
       
-
+// EXPELLING
     clone.querySelector("[data-field=expell]").addEventListener("click", clickExpell);
 
     function clickExpell() {
@@ -349,11 +349,55 @@ function displayStudent(student) {
         allStudents = allStudents.filter(student => student.expell===false);
     }
 
+
+// INQUISTORIAL SQUAD
+
+document.querySelector(".closebutton").addEventListener("click", addHide);
+
+function addHide() {
+    document.querySelector(".modal").classList.add("hide");
+};
+
+    if (student.inquis === true) {
+    //    clone.querySelector("[data-field=inquis]").style.backgroundImage = `url("images/inquis.png")`;
+        clone.querySelector("[data-field=inquis] img").setAttribute("src", "images/inquis.png");
+    } else {
+        clone.querySelector("[data-field=inquis]").textContent = "▢";
+    }
+
+    // clone.querySelector("[data-field=inquis]").dataset.inquis = student.inquis;
+    clone.querySelector("[data-field=inquis]").addEventListener("click", clickInquis);
+    function clickInquis() {
+        if(student.inquis === true) {
+            student.inquis = false;
+        } else {
+            student.inquis = makeInquis(student);
+            // console.log(student.inquis);
+        }
+
+        buildList();
+    }
+
+// PREFECT
+
+
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
 }
 
+function makeInquis(selectedStudent) {
+    // console.log(selectedStudent);
+    // console.log(selectedStudent.blood);
 
+        if (selectedStudent.house === "Slytherin") {
+            return true
+        } else if (selectedStudent.blood === "pure") {
+            return true
+        } else {
+            document.querySelector("#inquis_warning").classList.remove("hide");
+            return false
+        };
+}
 
 function showCount() {
     //ref https://stackoverflow.com/questions/45547504/counting-occurrences-of-particular-property-value-in-array-of-objects

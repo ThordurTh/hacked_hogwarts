@@ -2,19 +2,55 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Cormorant SC', serif;
 }
 
 body {
     background-color: rgb(252, 246, 235);
+    display: grid;
+    grid-template-columns: 20vw 1fr;
+    position: relative;
+}
+
+h1 {
+    
+}
+
+#controller {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    background-color: rgb(135, 59, 59);
+    height: 100vh;
+    width: 20vw;
+}
+
+table {
+    border-collapse:collapse;
+    width: 90vw;
+    margin-left: 20vw;
+    background-image: url(images/paper.jpg);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+#sorting th {
+   padding: 10px 20px;
+   border: 1px solid black;
+   font-weight: 600;
 }
 
 tr {
-    height: 80px;
+    /* max-height: 100px; */
 }
 
 img {
     height: 80px;
     aspect-ratio: 1/1;
+    border: 3px solid rgb(91, 27, 27);
+    border-radius: 30%;
+    box-shadow: 2px 2px 5px rgb(91, 27, 27);
 }
 
 #sorting th.sortby[data-sort-direction="asc"]::after {
@@ -28,10 +64,56 @@ img {
     cursor: pointer;
   }
 
-.hide {
-    display: none;
+tbody tr {
+    /* background-image: url(images/paper.jpg); */
+    text-align: center;
 }
 
 tbody tr td[data-field="expell"] {
     cursor: pointer;
   }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dialog {
+    box-shadow: 1px 1px 10px #333;
+    border-radius: 12px;
+    padding: 2em;
+    background-color: #eee;
+    position: relative;
+  }
+  
+  button.closebutton {
+    position: absolute;
+    right: -1em;
+    top: -1em;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+  }
+  
+  .dialog h1 {
+    margin-top: 0;
+  
+  }
+
+
+  .hide {
+    display: none;
+}
+
+.inquis_badge  {
+    padding: 1rem 1.7rem;
+    border: none;
+    box-shadow: none;
+}

@@ -4,49 +4,61 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Hacked Hogwarts</title>
   </head>
   <body>
-    <h1>Hogwarts Student List</h1>
-    <div>
-      Filter by:
-      <button class="filter" data-action="filter" data-filter="gryffindor">
-        Gryffindor
-      </button>
-      <button class="filter" data-action="filter" data-filter="slytherin">
-        Slytherin
-      </button>
-      <button class="filter" data-action="filter" data-filter="ravenclaw">
-        Ravenclaw
-      </button>
-      <button class="filter" data-action="filter" data-filter="hufflepuff">
-        Hufflepuff
-      </button>
-      <button class="filter" data-action="filter" data-filter="*">all</button>
+    <div id="controller">
+      <h1>Hogwarts Student List</h1>
+      <div>
+        <h2>Filter by:</h2>
+        <button class="filter" data-action="filter" data-filter="gryffindor">
+          Gryffindor
+        </button>
+        <button class="filter" data-action="filter" data-filter="slytherin">
+          Slytherin
+        </button>
+        <button class="filter" data-action="filter" data-filter="ravenclaw">
+          Ravenclaw
+        </button>
+        <button class="filter" data-action="filter" data-filter="hufflepuff">
+          Hufflepuff
+        </button>
+        <button class="filter" data-action="filter" data-filter="*">all</button>
+      </div>
+
+      <input
+        id="searchInput"
+        type="text"
+        class="input"
+        placeholder="search..."
+      />
+
+      <div id="count">
+        <div class="total"></div>
+        <div class="expelled"></div>
+
+        <div class="house_gryffindor"></div>
+        <div class="house_slytherin"></div>
+        <div class="house_ravenclaw"></div>
+        <div class="house_hufflepuff"></div>
+        <div class="currentCount">Currently displaying: 34 students</div>
+      </div>
     </div>
-
-    <input id="searchInput" type="text" class="input" placeholder="search..." />
-
-    <div id="count">
-      <div class="total"></div>
-      <div class="expelled"></div>
-
-      <div class="house_gryffindor"></div>
-      <div class="house_slytherin"></div>
-      <div class="house_ravenclaw"></div>
-      <div class="house_hufflepuff"></div>
-      <div class="currentCount">Currently displaying: 34 students</div>
-    </div>
-
-    <hr />
-
     <table id="list">
       <thead>
         <tr id="sorting">
-          <th data-action="sort" data-sort-direction="desc" data-sort="image">
-            image
-          </th>
+          <th
+            data-action="sort"
+            data-sort-direction="desc"
+            data-sort="image"
+          ></th>
           <th
             data-action="sort"
             data-sort-direction="desc"
@@ -100,6 +112,17 @@
       </tbody>
     </table>
 
+    <div id="inquis_warning" class="modal hide">
+      <div class="dialog">
+        <button class="closebutton">X</button>
+        <h1>Warning</h1>
+        <p>
+          This student is neither in the house of <br />
+          Slytherin nor from a pure-blood family!
+        </p>
+      </div>
+    </div>
+
     <template id="student">
       <tr>
         <td data-field="image"><img src="" alt="" /></td>
@@ -108,7 +131,9 @@
         <td data-field="lastName">lastname</td>
         <td data-field="nickname">nickname</td>
         <td data-field="house">house</td>
-        <td data-field="inquis">☆</td>
+        <td data-field="inquis">
+          <img class="inquis_badge" src="" alt="Inquisitorial Badge" />
+        </td>
         <td data-field="prefect" data-member="false">☆</td>
         <td data-field="gender">gender</td>
         <td data-field="expell">×</td>
