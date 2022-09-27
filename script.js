@@ -356,6 +356,8 @@ document.querySelector(".closebutton").addEventListener("click", addHide);
 
 function addHide() {
     document.querySelector(".modal").classList.add("hide");
+    document.querySelector("#inquis_warning .closebutton").removeEventListener("click", closeDialog);
+
 };
 
     if (student.inquis === true) {
@@ -378,12 +380,60 @@ function addHide() {
         buildList();
     }
 
-// PREFECT
+// PREFECT  
+    if (student.prefect === true) {
+        clone.querySelector("[data-field=prefect]").textContent = "★";
+    } else {
+        clone.querySelector("[data-field=prefect]").textContent = "☆";
+    }
 
+    clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+    function clickPrefect() {
+        if(student.prefect === true) {
+            student.prefect = false;
+        } else {
+            // student.prefect = true;
+            // student.prefect = makePrefect(student);
+            makePrefect(student);
+            // console.log(student);
+            // console.log(student.prefect);
+        }
+
+        buildList();
+    }
 
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
+} // END OF DISPLAYSTUDENT
+
+function makePrefect(selectedStudent) {
+
+
+    
+    console.log(selectedStudent.house)
+
+    const prefectMembers = allStudents.filter(student => student.prefect);
+    console.log("prefectMembers", prefectMembers);
+    const prefectsOfHouse = prefectMembers.filter(student => (student.house === selectedStudent.house));
+    console.log("prefectsOfHouse", prefectsOfHouse);
+
+    // const other = prefectMembers.filter(student => student.house === selectedStudent.house).shift();
+    // console.log(other);
+
+
+    if (prefectsOfHouse.length < 2) {
+        console.log(`number of prefects is: ${prefectsOfHouse.length}`);
+        selectedStudent.prefect = true;
+    } else {
+        console.log("too many prefects")
+        // removeAorB(prefectsOfHouse[0], prefectsOfHouse[1]);
+        selectedStudent.prefect = false;
+    }
 }
+
+// function removeAorB(prefectA, prefectB){
+
+// }
 
 function makeInquis(selectedStudent) {
     // console.log(selectedStudent);
