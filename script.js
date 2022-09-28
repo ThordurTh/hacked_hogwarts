@@ -369,11 +369,22 @@ function isNickname() {
     }
 };
 
+
 clone.querySelector(".student_details_wrapper .house").textContent = student.house;
 clone.querySelector(".house_image img").setAttribute("src", `images/${student.house.toLowerCase()}.png`)
 
 clone.querySelector(".student_details_wrapper .blood").textContent = `Family: ${student.blood}`;
 clone.querySelector(".student_details_wrapper .gender").textContent = `Gender: ${student.gender}`;
+
+// ADD A SYMBOLD FOR INQUIS AND PREFECT
+if (student.prefect && student.inquis) {
+    clone.querySelector("[data-field=firstName]").textContent = `${student.firstName}🎖️☆`;
+} else if (student.prefect) {
+    clone.querySelector("[data-field=firstName]").textContent = `${student.firstName}☆`;
+} else if (student.inquis) {
+    clone.querySelector("[data-field=firstName]").textContent = `${student.firstName}🎖️`;
+}
+
 
 
 
@@ -407,53 +418,53 @@ clone.querySelectorAll(".student_details_actions .closebutton").forEach(button =
 
    
 
-// // INQUISTORIAL SQUAD
+// INQUISTORIAL SQUAD
 
-// document.querySelector(".closebutton").addEventListener("click", addHide);
+document.querySelector(".closebutton").addEventListener("click", addHide);
 
 
 
-//     if (student.inquis === true) {
-//     //    clone.querySelector("[data-field=inquis]").style.backgroundImage = `url("images/inquis.png")`;
-//         clone.querySelector("[data-field=inquis] img").setAttribute("src", "images/inquis.png");
-//     } else {
-//         clone.querySelector("[data-field=inquis]").textContent = "▢";
-//     }
+    if (student.inquis === true) {
+    //    clone.querySelector("[data-field=inquis]").style.backgroundImage = `url("images/inquis.png")`;
+        // clone.querySelector("[data-field=inquis] img").setAttribute("src", "images/inquis.png");
+        clone.querySelector(".inquis").textContent = "Remove from the Inquisitorial Squad";
+    } else {
+        clone.querySelector(".inquis").textContent = "Appoint to the Inquisitorial Squad";
+    }
 
-//     // clone.querySelector("[data-field=inquis]").dataset.inquis = student.inquis;
-//     clone.querySelector("[data-field=inquis]").addEventListener("click", clickInquis);
-//     function clickInquis() {
-//         if(student.inquis === true) {
-//             student.inquis = false;
-//         } else {
-//             student.inquis = makeInquis(student);
-//             // console.log(student.inquis);
-//         }
+    // clone.querySelector("[data-field=inquis]").dataset.inquis = student.inquis;
+    clone.querySelector(".inquis").addEventListener("click", clickInquis);
+    function clickInquis() {
+        if(student.inquis === true) {
+            student.inquis = false;
+        } else {
+            student.inquis = makeInquis(student);
+        }
 
-//         buildList();
-//     }
+        buildList();
+    }
 
-// // PREFECT  
-//     if (student.prefect === true) {
-//         clone.querySelector("[data-field=prefect]").textContent = "★";
-//     } else {
-//         clone.querySelector("[data-field=prefect]").textContent = "☆";
-//     }
+// PREFECT
+    if (student.prefect === true) {
+        clone.querySelector(".prefect").textContent = "Remove house prefect";
+    } else {
+        clone.querySelector(".prefect").textContent = "Make house prefect";
+    }
 
-//     clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
-//     function clickPrefect() {
-//         if(student.prefect === true) {
-//             student.prefect = false;
-//         } else {
-//             // student.prefect = true;
-//             // student.prefect = makePrefect(student);
-//             makePrefect(student);
-//             // console.log(student);
-//             // console.log(student.prefect);
-//         }
+    clone.querySelector(".prefect").addEventListener("click", clickPrefect);
+    function clickPrefect() {
+        if(student.prefect === true) {
+            student.prefect = false;
+        } else {
+            // student.prefect = true;
+            // student.prefect = makePrefect(student);
+            makePrefect(student);
+            // console.log(student);
+            // console.log(student.prefect);
+        }
 
-//         buildList();
-//     }
+        buildList();
+    }
 
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
