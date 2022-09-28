@@ -326,14 +326,14 @@ function displayStudent(student) {
     clone.querySelector("[data-field=nickname]").textContent = student.nickname;
     clone.querySelector("[data-field=image] img").setAttribute("src", student.image);
     clone.querySelector("[data-field=house]").textContent = student.house;
-    clone.querySelector("[data-field=gender]").textContent = student.gender;
+    // clone.querySelector("[data-field=gender]").textContent = student.gender;
     // clone.querySelector("[data-field=inquis]").textContent = student.inquis;
-    clone.querySelector("[data-field=prefect]").textContent = student.prefect;
-    clone.querySelector("[data-field=blood]").textContent = student.blood;
+    // clone.querySelector("[data-field=prefect]").textContent = student.prefect;
+    // clone.querySelector("[data-field=blood]").textContent = student.blood;
     clone.querySelector("[data-field=fullname]").textContent = student.fullname;
       
 // EXPELLING
-    clone.querySelector("[data-field=expell]").addEventListener("click", clickExpell);
+    clone.querySelector("button .expell").addEventListener("click", clickExpell);
 
     function clickExpell() {
         if (student.expell === false) {

@@ -73,7 +73,7 @@ tbody tr td[data-field="expell"] {
     cursor: pointer;
   }
 
-  .modal {
+  .modal, .student_details_wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -85,6 +85,24 @@ tbody tr td[data-field="expell"] {
     align-items: center;
   }
   
+  .student_details_actions {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid white;
+    padding: 2rem;
+  }
+
+  .student_actions {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    padding-top: 1rem;
+    gap: 1rem;
+    grid-area: 2/1/ span 1 / span 2;
+  }
+
   .dialog {
     box-shadow: 1px 1px 10px #333;
     border-radius: 12px;

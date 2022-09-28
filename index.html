@@ -90,7 +90,7 @@
           <th data-action="sort" data-sort-direction="desc" data-sort="house">
             House
           </th>
-          <th data-action="sort" data-sort-direction="desc" data-sort="inquis">
+          <!-- <th data-action="sort" data-sort-direction="desc" data-sort="inquis">
             Inquisitorial Squad
           </th>
           <th data-action="sort" data-sort-direction="desc" data-sort="prefect">
@@ -104,7 +104,7 @@
           </th>
           <th data-action="sort" data-sort-direction="desc" data-sort="blood">
             Blood Type
-          </th>
+          </th> -->
         </tr>
       </thead>
       <tbody>
@@ -144,17 +144,31 @@
         <td data-field="firstName">firstname</td>
         <td data-field="middleName">middlename</td>
         <td data-field="lastName">lastname</td>
-        <td data-field="nickname">nickname</td>
         <td data-field="house">house</td>
-        <td data-field="inquis">
-          <img class="inquis_badge" src="" alt="Inquisitorial Badge" />
-        </td>
-        <td data-field="prefect" data-member="false">☆</td>
-        <td data-field="gender">gender</td>
-        <td data-field="expell">×</td>
-        <td data-field="blood">blood</td>
+        <td data-field="nickname">nickname</td>
         <td data-field="fullname" class="hide fullname"></td>
       </tr>
+      
+      <div class="student_details_wrapper hide">
+        <div class="student_details_actions">
+            <img src="" alt="">
+            <div class="student_details">
+            <p class="first_name">first_name</p>
+            <p class="middle_name">middle_name</p>
+            <p class="last_name">last_name</p>
+            <p class="nickname">nickname</p>
+            <p class="house">house</p>
+            <p class="blood">blood</p>
+            <p class="gender">gender</p>
+            </div>
+            <div class="student_actions">
+            <button class="inquis">inquis</button>
+            <button class="prefect">prefect</button>
+            <button class="expell">expell</button>
+            </div>
+        </div>
+    </div>
+
     </template>
 
     <script src="script.js"></script>
