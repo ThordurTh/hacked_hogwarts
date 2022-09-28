@@ -8,7 +8,7 @@
 body {
     background-color: rgb(252, 246, 235);
     display: grid;
-    grid-template-columns: 20vw 1fr;
+    grid-template-columns: 20vw 80vw;
     position: relative;
 }
 
@@ -28,7 +28,7 @@ h1 {
 
 table {
     border-collapse:collapse;
-    width: 90vw;
+    width: 80vw;
     margin-left: 20vw;
     background-image: url(images/paper.jpg);
     font-size: 1.2rem;
@@ -86,6 +86,7 @@ tbody tr td[data-field="expell"] {
   }
   
   .student_details_actions {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;

@@ -323,85 +323,135 @@ function displayStudent(student) {
     clone.querySelector("[data-field=firstName]").textContent = student.firstName;
     clone.querySelector("[data-field=middleName]").textContent = student.middleName;
     clone.querySelector("[data-field=lastName]").textContent = student.lastName;
-    clone.querySelector("[data-field=nickname]").textContent = student.nickname;
     clone.querySelector("[data-field=image] img").setAttribute("src", student.image);
     clone.querySelector("[data-field=house]").textContent = student.house;
-    // clone.querySelector("[data-field=gender]").textContent = student.gender;
+    // clone.querySelector("student_details_wrapper").textContent = student.gender;
     // clone.querySelector("[data-field=inquis]").textContent = student.inquis;
     // clone.querySelector("[data-field=prefect]").textContent = student.prefect;
     // clone.querySelector("[data-field=blood]").textContent = student.blood;
     clone.querySelector("[data-field=fullname]").textContent = student.fullname;
+
       
-// EXPELLING
-    clone.querySelector("button .expell").addEventListener("click", clickExpell);
 
-    function clickExpell() {
-        if (student.expell === false) {
-            student.expell = true;
-            expellStudent(student);
-        } 
+// POPUP
+clone.querySelector(".student_details_wrapper img").setAttribute("src", student.image);
 
-        buildList();
-    }
-
-    function expellStudent(selectedStudent) {
-        expelledStudents.push(selectedStudent);
-        allStudents = allStudents.filter(student => student.expell===false);
-    }
-
-
-// INQUISTORIAL SQUAD
-
-document.querySelector(".closebutton").addEventListener("click", addHide);
-
-
-
-    if (student.inquis === true) {
-    //    clone.querySelector("[data-field=inquis]").style.backgroundImage = `url("images/inquis.png")`;
-        clone.querySelector("[data-field=inquis] img").setAttribute("src", "images/inquis.png");
+clone.querySelector(".student_details_wrapper .first_name").textContent = `First name: ${student.firstName}`;
+clone.querySelector(".student_details_wrapper .middle_name").textContent = isMiddleName();
+function isMiddleName() {
+    if (student.middleName === " " || student.middleName === "") {
+        return ""
     } else {
-        clone.querySelector("[data-field=inquis]").textContent = "▢";
+        return `Middle name: ${student.middleName}`
+        // console.log(student.middleName === "")
     }
+};
 
-    // clone.querySelector("[data-field=inquis]").dataset.inquis = student.inquis;
-    clone.querySelector("[data-field=inquis]").addEventListener("click", clickInquis);
-    function clickInquis() {
-        if(student.inquis === true) {
-            student.inquis = false;
-        } else {
-            student.inquis = makeInquis(student);
-            // console.log(student.inquis);
-        }
-
-        buildList();
-    }
-
-// PREFECT  
-    if (student.prefect === true) {
-        clone.querySelector("[data-field=prefect]").textContent = "★";
+clone.querySelector(".student_details_wrapper .last_name").textContent = isLastName();
+function isLastName() {
+    if (student.lastName !== "") {
+        return `Last name: ${student.lastName}`
     } else {
-        clone.querySelector("[data-field=prefect]").textContent = "☆";
+        return ""
     }
+};
 
-    clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
-    function clickPrefect() {
-        if(student.prefect === true) {
-            student.prefect = false;
-        } else {
-            // student.prefect = true;
-            // student.prefect = makePrefect(student);
-            makePrefect(student);
-            // console.log(student);
-            // console.log(student.prefect);
-        }
-
-        buildList();
+clone.querySelector(".student_details_wrapper .nickname").textContent = isNickname();
+function isNickname() {
+    if (student.nickname !== undefined) {
+        return `Nickname: ${student.nickname}`
+    } else {
+        return ""
     }
+};
+
+clone.querySelector(".student_details_wrapper .house").textContent = `House: ${student.house}`;
+clone.querySelector(".student_details_wrapper .blood").textContent = `Family: ${student.blood}`;
+clone.querySelector(".student_details_wrapper .gender").textContent = `Gender: ${student.gender}`;
+
+
+clone.querySelectorAll("[data-field=details] button").forEach(button => button.addEventListener("click", showPopup));
+clone.querySelectorAll(".student_details_actions .closebutton").forEach(button => button.addEventListener("click", addHide));
+
+// clone.querySelector(".closebutton").addEventListener("click", addHide);
+
+
+
+// // EXPELLING
+//     clone.querySelector("button .expell").addEventListener("click", clickExpell);
+
+//     function clickExpell() {
+//         if (student.expell === false) {
+//             student.expell = true;
+//             expellStudent(student);
+//         } 
+
+//         buildList();
+//     }
+
+//     function expellStudent(selectedStudent) {
+//         expelledStudents.push(selectedStudent);
+//         allStudents = allStudents.filter(student => student.expell===false);
+//     }
+
+
+// // INQUISTORIAL SQUAD
+
+// document.querySelector(".closebutton").addEventListener("click", addHide);
+
+
+
+//     if (student.inquis === true) {
+//     //    clone.querySelector("[data-field=inquis]").style.backgroundImage = `url("images/inquis.png")`;
+//         clone.querySelector("[data-field=inquis] img").setAttribute("src", "images/inquis.png");
+//     } else {
+//         clone.querySelector("[data-field=inquis]").textContent = "▢";
+//     }
+
+//     // clone.querySelector("[data-field=inquis]").dataset.inquis = student.inquis;
+//     clone.querySelector("[data-field=inquis]").addEventListener("click", clickInquis);
+//     function clickInquis() {
+//         if(student.inquis === true) {
+//             student.inquis = false;
+//         } else {
+//             student.inquis = makeInquis(student);
+//             // console.log(student.inquis);
+//         }
+
+//         buildList();
+//     }
+
+// // PREFECT  
+//     if (student.prefect === true) {
+//         clone.querySelector("[data-field=prefect]").textContent = "★";
+//     } else {
+//         clone.querySelector("[data-field=prefect]").textContent = "☆";
+//     }
+
+//     clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+//     function clickPrefect() {
+//         if(student.prefect === true) {
+//             student.prefect = false;
+//         } else {
+//             // student.prefect = true;
+//             // student.prefect = makePrefect(student);
+//             makePrefect(student);
+//             // console.log(student);
+//             // console.log(student.prefect);
+//         }
+
+//         buildList();
+//     }
 
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
 } 
 ///////////////// END OF DISPLAYSTUDENT////////////////
+
+//// POPUP FUNCTION
+function showPopup() {
+this.nextElementSibling.classList.remove("hide");
+}
 
 function makePrefect(selectedStudent) {
 
@@ -498,7 +548,7 @@ function showCount() {
 }
 
 function addHide() {
+    this.parentElement.parentElement.classList.add("hide");
     document.querySelector(".modal").classList.add("hide");
-    document.querySelector(".closebutton").removeEventListener("click", addHide);
 
 };

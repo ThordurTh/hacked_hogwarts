@@ -80,16 +80,17 @@
           >
             Last Name
           </th>
-          <th
+          <!-- <th
             data-action="sort"
             data-sort-direction="desc"
             data-sort="nickname"
           >
             Nickname
-          </th>
+          </th> -->
           <th data-action="sort" data-sort-direction="desc" data-sort="house">
             House
           </th>
+          <th>Details</th>
           <!-- <th data-action="sort" data-sort-direction="desc" data-sort="inquis">
             Inquisitorial Squad
           </th>
@@ -145,29 +146,33 @@
         <td data-field="middleName">middlename</td>
         <td data-field="lastName">lastname</td>
         <td data-field="house">house</td>
-        <td data-field="nickname">nickname</td>
+        <td data-field="details">
+            <button>Details</button>
+            <div class="student_details_wrapper hide">
+            <div class="student_details_actions">
+                <button class="closebutton">X</button>
+    
+                <img class="image" src="" alt="">
+                <div class="student_details">
+                <p class="first_name">first_name</p>
+                <p class="middle_name">middle_name</p>
+                <p class="last_name">last_name</p>
+                <p class="nickname">nickname</p>
+                <p class="house">house</p>
+                <p class="blood">blood</p>
+                <p class="gender">gender</p>
+                </div>
+                <div class="student_actions">
+                <button class="inquis">inquis</button>
+                <button class="prefect">prefect</button>
+                <button class="expell">expell</button>
+                </div>
+            </div>
+        </div></td>
         <td data-field="fullname" class="hide fullname"></td>
       </tr>
       
-      <div class="student_details_wrapper hide">
-        <div class="student_details_actions">
-            <img src="" alt="">
-            <div class="student_details">
-            <p class="first_name">first_name</p>
-            <p class="middle_name">middle_name</p>
-            <p class="last_name">last_name</p>
-            <p class="nickname">nickname</p>
-            <p class="house">house</p>
-            <p class="blood">blood</p>
-            <p class="gender">gender</p>
-            </div>
-            <div class="student_actions">
-            <button class="inquis">inquis</button>
-            <button class="prefect">prefect</button>
-            <button class="expell">expell</button>
-            </div>
-        </div>
-    </div>
+      
 
     </template>
 
