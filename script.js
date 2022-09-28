@@ -143,6 +143,7 @@ function prepareObject( studentData ) {
 //----------------------------------------------
 // FILTERING
 //----------------------------------------------
+
 function selectFilter(event){
     // console.log(event)
     // Clear searchfield
@@ -174,6 +175,9 @@ function filterList(filteredList) {
     } else if (settings.filterBy === "Hufflepuff") {
         // Create a filtered list of only dogs
         filteredList = allStudents.filter(isHuffle);
+    } else if (settings.filterBy === "Expelled") {
+        // Create a filtered list of only dogs
+        filteredList = expelledStudents;
     } else { // this "else" in unneccesary but makes it more clear
         filteredList = allStudents;
         settings.currentCount = allStudents.length;
@@ -365,9 +369,12 @@ function isNickname() {
     }
 };
 
-clone.querySelector(".student_details_wrapper .house").textContent = `House: ${student.house}`;
+clone.querySelector(".student_details_wrapper .house").textContent = student.house;
+clone.querySelector(".house_image img").setAttribute("src", `images/${student.house.toLowerCase()}.png`)
+
 clone.querySelector(".student_details_wrapper .blood").textContent = `Family: ${student.blood}`;
 clone.querySelector(".student_details_wrapper .gender").textContent = `Gender: ${student.gender}`;
+
 
 
 clone.querySelectorAll("[data-field=details] button").forEach(button => button.addEventListener("click", showPopup));
@@ -377,23 +384,28 @@ clone.querySelectorAll(".student_details_actions .closebutton").forEach(button =
 
 
 
-// // EXPELLING
-//     clone.querySelector("button .expell").addEventListener("click", clickExpell);
+// EXPELLING
+    clone.querySelector(".expell").addEventListener("click", clickExpell);
 
-//     function clickExpell() {
-//         if (student.expell === false) {
-//             student.expell = true;
-//             expellStudent(student);
-//         } 
+    // if (student.expell) {
+    //     document.querySelector(".expell").classList.add("hide");
+    // }
 
-//         buildList();
-//     }
+    function clickExpell() {
+        if (student.expell === false) {
+            student.expell = true;
+            expellStudent(student);
+        } 
 
-//     function expellStudent(selectedStudent) {
-//         expelledStudents.push(selectedStudent);
-//         allStudents = allStudents.filter(student => student.expell===false);
-//     }
+        buildList();
+    }
 
+    function expellStudent(selectedStudent) {
+        expelledStudents.push(selectedStudent);
+        allStudents = allStudents.filter(student => student.expell===false);
+    }
+
+   
 
 // // INQUISTORIAL SQUAD
 
@@ -550,5 +562,4 @@ function showCount() {
 function addHide() {
     this.parentElement.parentElement.classList.add("hide");
     document.querySelector(".modal").classList.add("hide");
-
 };

@@ -10,10 +10,17 @@ body {
     display: grid;
     grid-template-columns: 20vw 80vw;
     position: relative;
+    background-image: url(images/paper.jpg);
+
 }
 
 h1 {
-    
+    text-align: center;
+    background-color: rgba(180, 135, 101, 0.59);
+    border-radius: 20px;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-weight: 600;
 }
 
 #controller {
@@ -26,11 +33,88 @@ h1 {
     width: 20vw;
 }
 
+#controller h2 {
+    text-align: center;
+    margin-bottom: 0.8rem ;
+}
+
+#filters {
+    margin: 1rem 0;
+}
+
+.filterButtons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    justify-items: center;
+    row-gap: 0.8rem;
+}
+
+.filterButtons button {
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filterButtons .gryffindor_emblem {
+    background-image: url(images/gryffindor.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90px;
+}
+
+.filterButtons .slytherin_emblem {
+    background-image: url(images/slytherin.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90px;
+}
+
+.filterButtons .ravenclaw_emblem {
+    background-image: url(images/ravenclaw.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90px;
+}
+
+.filterButtons .hufflepuff_emblem {
+    background-image: url(images/hufflepuff.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90px;
+}
+
+.filterButtons img {
+    border: none;
+    box-shadow: none;
+}
+
+#searchInput {
+    width: 80%;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+#count {
+    background-color: rgba(180, 135, 101, 0.59);
+    border-radius: 20px;
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 150%;
+    width: 90%;
+    align-self: center;
+}
+
+/*////////// TABLE //////////*/
+
 table {
     border-collapse:collapse;
-    width: 80vw;
+    width: 79vw;
     margin-left: 20vw;
-    background-image: url(images/paper.jpg);
     font-size: 1.2rem;
     font-weight: 600;
 }
@@ -73,7 +157,16 @@ tbody tr td[data-field="expell"] {
     cursor: pointer;
   }
 
-  .modal, .student_details_wrapper {
+
+button {
+    background-color: rgba(180, 135, 101, 0.59);
+    border-radius: 10%;
+    padding: 0.1rem 0.3rem;
+    font-size: 1rem;
+}
+
+  
+.modal, .student_details_wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -83,51 +176,78 @@ tbody tr td[data-field="expell"] {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
   
-  .student_details_actions {
+.student_details_actions {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     gap: 1rem;
-    border: 1px solid white;
+    border: 5px groove rgba(180, 135, 101, 0.59);
+    border-radius: 20px;
+    box-shadow: 3px 1px 20px rgb(38, 38, 38);
     padding: 2rem;
-  }
+    background-image: url(images/paper.jpg);
+}
 
-  .student_actions {
+.student_details_actions .closebutton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    /* filter: hue-rotate(100deg); */
+    filter: brightness(500%) grayscale(100%) hue-rotate(250deg) drop-shadow(8px 8px 10px rgb(198, 198, 198));
+    /* box-shadow: 3px 1px 20px rgb(255, 255, 255); */
+    cursor: pointer;
+
+}
+
+
+
+.student_details_actions .closebutton:active {
+    transform: translate(0.5px, 1px);
+    filter: grayscale(100) invert();
+}
+
+.student_actions {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     padding-top: 1rem;
     gap: 1rem;
-    grid-area: 2/1/ span 1 / span 2;
-  }
+    grid-area: 2/1/ span 1 / span 3;
+}
 
-  .dialog {
+.house_image img {
+    border: none;
+    box-shadow: none;
+}
+
+
+.dialog {
     box-shadow: 1px 1px 10px #333;
     border-radius: 12px;
     padding: 2em;
     background-color: #eee;
     position: relative;
-  }
+}
   
-  button.closebutton {
+button.closebutton {
     position: absolute;
-    right: -1em;
-    top: -1em;
+    right: -0.9em;
+    top: -0.9em;
     border-radius: 50%;
     width: 2em;
     height: 2em;
-  }
+}
   
-  .dialog h1 {
+.dialog h1 {
     margin-top: 0;
   
-  }
+}
 
 
-  .hide {
+.hide {
     display: none;
 }
 

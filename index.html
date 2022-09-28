@@ -16,22 +16,29 @@
   <body>
     <div id="controller">
       <h1>Hogwarts Student List</h1>
-      <div>
+      <div id="filters">
         <h2>Filter by:</h2>
-        <button class="filter" data-action="filter" data-filter="gryffindor">
-          Gryffindor
+        <div class="filterButtons">
+        <button class="filter gryffindor_emblem" data-action="filter" data-filter="gryffindor">
+          <!-- <img src="images/gryffindor.png" alt="gryffindor emblem"> -->
         </button>
-        <button class="filter" data-action="filter" data-filter="slytherin">
-          Slytherin
+        <button class="filter slytherin_emblem" data-action="filter" data-filter="slytherin">
+            <!-- <img src="images/slytherin.png" alt="slytherin emblem"> -->
+
         </button>
-        <button class="filter" data-action="filter" data-filter="ravenclaw">
-          Ravenclaw
+        <button class="filter ravenclaw_emblem" data-action="filter" data-filter="ravenclaw">
+            <!-- <img src="images/ravenclaw.png" alt="ravenclaw emblem"> -->
+
         </button>
-        <button class="filter" data-action="filter" data-filter="hufflepuff">
-          Hufflepuff
+        <button class="filter hufflepuff_emblem" data-action="filter" data-filter="hufflepuff">
+            <!-- <img src="images/hufflepuff.png" alt="hufflepuff emblem"> -->
+
         </button>
+        <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
+
         <button class="filter" data-action="filter" data-filter="*">all</button>
       </div>
+    </div>
 
       <input
         id="searchInput"
@@ -90,7 +97,7 @@
           <th data-action="sort" data-sort-direction="desc" data-sort="house">
             House
           </th>
-          <th>Details</th>
+          <th></th>
           <!-- <th data-action="sort" data-sort-direction="desc" data-sort="inquis">
             Inquisitorial Squad
           </th>
@@ -147,25 +154,29 @@
         <td data-field="lastName">lastname</td>
         <td data-field="house">house</td>
         <td data-field="details">
-            <button>Details</button>
+            <button class="detailsButton">Details</button>
             <div class="student_details_wrapper hide">
             <div class="student_details_actions">
-                <button class="closebutton">X</button>
+                <button class="closebutton">❌</button>
     
                 <img class="image" src="" alt="">
                 <div class="student_details">
-                <p class="first_name">first_name</p>
-                <p class="middle_name">middle_name</p>
-                <p class="last_name">last_name</p>
-                <p class="nickname">nickname</p>
-                <p class="house">house</p>
-                <p class="blood">blood</p>
-                <p class="gender">gender</p>
+                    <p class="first_name">first_name</p>
+                    <p class="middle_name">middle_name</p>
+                    <p class="last_name">last_name</p>
+                    <p class="nickname">nickname</p>
+                    
+                    <p class="blood">blood</p>
+                    <p class="gender">gender</p>
+                </div>
+                <div class="house_image">
+                    <img src="" alt="">
+                    <p class="house">house</p>
                 </div>
                 <div class="student_actions">
-                <button class="inquis">inquis</button>
-                <button class="prefect">prefect</button>
-                <button class="expell">expell</button>
+                    <button class="inquis">inquis</button>
+                    <button class="prefect">prefect</button>
+                    <button class="expell">expell</button>
                 </div>
             </div>
         </div></td>
