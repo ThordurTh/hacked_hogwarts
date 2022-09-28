@@ -256,8 +256,32 @@ button.closebutton {
     display: none;
 }
 
-.inquis_badge  {
+/* .inquis_badge  {
     padding: 1rem 1.7rem;
     border: none;
     box-shadow: none;
+} */
+
+.wiggle {
+    animation: wiggle 3s 2s;
 }
+
+@keyframes wiggle {
+    0% { transform: skewX(9deg); } 
+    10% { transform: skewX(-8deg); } 
+    20% { transform: skewX(7deg); } 
+    30% { transform: skewX(-6deg); } 
+    40% { transform: skewX(5deg); } 
+    50% { transform: skewX(-4deg); } 
+    60% { transform: skewX(3deg);
+            opacity: 80%;
+    } 
+    70% { transform: skewX(-2deg); 
+        opacity: 60%;} 
+    80% { transform: skewX(1deg); 
+        opacity: 40%;} 
+    90% { transform: skewX(0deg); 
+        opacity: 20%;} 
+    100% { transform: skewX(0deg); 
+        opacity: 0%;} 
+ } 

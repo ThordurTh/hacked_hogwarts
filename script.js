@@ -24,7 +24,7 @@ const Student = {
     inquis: false,
     prefect: false,
     expell: false,
-    blood: "muggle",
+    blood: "",
     fullname: ""
 }
 
@@ -32,7 +32,8 @@ const settings = {
     filterBy: "all",
     sortBy: "firstName",
     sortDir: "asc",
-    currentCount: 0
+    currentCount: 0,
+    isHacked: false
 }
 
 // START
@@ -135,6 +136,8 @@ function prepareObject( studentData ) {
             student.blood = "pure";
         } else if (halfBloodFamNames.includes(student.lastName)) {
             student.blood = "half";
+        } else {
+            student.blood = "muggle";
         }
     }
     return student;
@@ -323,6 +326,34 @@ function displayStudent(student) {
     // create clone
     const clone = document.querySelector("template#student").content.cloneNode(true);
 
+    //hackthesystem
+    if (settings.isHacked) {
+      changeBloodStatus();
+      cantExpell();
+    }
+
+    function cantExpell() {
+        if (student.firstName === "Thordur") {
+            clone.querySelector(".expell").classList.add("hide");
+        }
+    }
+
+    function changeBloodStatus() {
+     if (student.blood === "muggle") {
+        student.blood = "pure"
+    } else if(student.blood === "pure"){
+        let rndmBlood = Math.floor(Math.random() * 3);
+        if (rndmBlood === 1) {
+            student.blood = "pure"
+        } else if(rndmBlood === 2) {
+            student.blood = "half"
+        } else if(rndmBlood === 3) {
+            student.blood = "muggle"
+        }
+    }
+    }
+
+
     // set clone data
     clone.querySelector("[data-field=firstName]").textContent = student.firstName;
     clone.querySelector("[data-field=middleName]").textContent = student.middleName;
@@ -376,6 +407,7 @@ clone.querySelector(".house_image img").setAttribute("src", `images/${student.ho
 clone.querySelector(".student_details_wrapper .blood").textContent = `Family: ${student.blood}`;
 clone.querySelector(".student_details_wrapper .gender").textContent = `Gender: ${student.gender}`;
 
+
 // ADD A SYMBOLD FOR INQUIS AND PREFECT
 if (student.prefect && student.inquis) {
     clone.querySelector("[data-field=firstName]").textContent = `${student.firstName}🎖️☆`;
@@ -383,6 +415,9 @@ if (student.prefect && student.inquis) {
     clone.querySelector("[data-field=firstName]").textContent = `${student.firstName}☆`;
 } else if (student.inquis) {
     clone.querySelector("[data-field=firstName]").textContent = `${student.firstName}🎖️`;
+    if (settings.isHacked) {
+        clone.querySelector("[data-field=firstName]").classList.add("wiggle");
+    }
 }
 
 
@@ -441,6 +476,15 @@ document.querySelector(".closebutton").addEventListener("click", addHide);
             student.inquis = makeInquis(student);
         }
 
+        if (settings.isHacked) {
+            setTimeout(removeIfHacked, 5000)
+        }
+        
+        buildList();
+    }
+
+    function removeIfHacked() {
+        student.inquis = false;
         buildList();
     }
 
@@ -465,6 +509,7 @@ document.querySelector(".closebutton").addEventListener("click", addHide);
 
         buildList();
     }
+   
 
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
@@ -574,3 +619,30 @@ function addHide() {
     this.parentElement.parentElement.classList.add("hide");
     document.querySelector(".modal").classList.add("hide");
 };
+
+function hackTheSystem() {
+
+    settings.isHacked = true;
+    // My name injected and cannot be expelled ////// DONE ///////
+    const newStudent = {
+        firstName: "Thordur",
+        middleName: "Frimann",
+        lastName: "Thorhallsson",
+        nickname: "Thor",
+        gender: "male",
+        image: "",
+        house: "Ravenclaw",
+        inquis: false,
+        prefect: false,
+        expell: false,
+        blood: "muggle",
+        fullname: "thordur frimann thorhallsson"
+    }
+    allStudents.push(newStudent);
+
+    buildList();
+    
+    // pure bloods will get a random blood status, everyone else is pure blood ////DONE////
+
+    // adding a student to inquis only works for a certain time
+}
