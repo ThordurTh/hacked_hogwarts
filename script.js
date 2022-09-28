@@ -354,11 +354,7 @@ function displayStudent(student) {
 
 document.querySelector(".closebutton").addEventListener("click", addHide);
 
-function addHide() {
-    document.querySelector(".modal").classList.add("hide");
-    document.querySelector("#inquis_warning .closebutton").removeEventListener("click", closeDialog);
 
-};
 
     if (student.inquis === true) {
     //    clone.querySelector("[data-field=inquis]").style.backgroundImage = `url("images/inquis.png")`;
@@ -404,36 +400,69 @@ function addHide() {
 
     // append clone to list
     document.querySelector("#list tbody").appendChild( clone );
-} // END OF DISPLAYSTUDENT
+} 
+///////////////// END OF DISPLAYSTUDENT////////////////
 
 function makePrefect(selectedStudent) {
 
-
-    
-    console.log(selectedStudent.house)
-
     const prefectMembers = allStudents.filter(student => student.prefect);
-    console.log("prefectMembers", prefectMembers);
+    // console.log("prefectMembers", prefectMembers);
     const prefectsOfHouse = prefectMembers.filter(student => (student.house === selectedStudent.house));
-    console.log("prefectsOfHouse", prefectsOfHouse);
-
-    // const other = prefectMembers.filter(student => student.house === selectedStudent.house).shift();
-    // console.log(other);
-
+    // console.log("prefectsOfHouse", prefectsOfHouse);
 
     if (prefectsOfHouse.length < 2) {
-        console.log(`number of prefects is: ${prefectsOfHouse.length}`);
+        // console.log(`number of prefects is: ${prefectsOfHouse.length}`);
         selectedStudent.prefect = true;
     } else {
-        console.log("too many prefects")
-        // removeAorB(prefectsOfHouse[0], prefectsOfHouse[1]);
+        // console.log("too many prefects")
+        removeAorB(prefectsOfHouse[0], prefectsOfHouse[1]);
         selectedStudent.prefect = false;
     }
+
+    function removeAorB(prefectA, prefectB){
+        document.querySelector("#remove_aorb").classList.remove("hide");
+        document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
+        document.querySelector("#remove_aorb #removea").addEventListener("click", clickRemoveA);
+        document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
+    
+        document.querySelector("#remove_aorb [data-field=prefectHouse]").textContent = prefectA.house;
+        document.querySelector("#remove_aorb [data-field=winnera]").textContent = prefectA.firstName;
+        document.querySelector("#remove_aorb [data-field=winnerb]").textContent = prefectB.firstName;
+    
+        function closeDialog() {
+            document.querySelector("#remove_aorb").classList.add("hide");
+            document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
+            document.querySelector("#remove_aorb #removea").removeEventListener("click", clickRemoveA);
+            document.querySelector("#remove_aorb #removeb").removeEventListener("click", clickRemoveB);
+        }
+        
+        // if ignore - do nothing
+        // if remove A:
+        function clickRemoveA() {
+            removeWinner(prefectA);
+            makeWinner(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+        // if remove B
+        function clickRemoveB() {
+            removeWinner(prefectB);
+            makeWinner(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+    
+    function removeWinner(prefect) {
+        prefect.prefect = false;
+    }
+    
+    function makeWinner(selectedStudent) {
+        selectedStudent.prefect = true;
+    }
+    
+    }
+
 }
-
-// function removeAorB(prefectA, prefectB){
-
-// }
 
 function makeInquis(selectedStudent) {
     // console.log(selectedStudent);
@@ -468,3 +497,8 @@ function showCount() {
     document.querySelector(".currentCount").textContent = `Currently displaying: ${settings.currentCount}`;
 }
 
+function addHide() {
+    document.querySelector(".modal").classList.add("hide");
+    document.querySelector(".closebutton").removeEventListener("click", addHide);
+
+};
